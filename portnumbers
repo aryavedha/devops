@@ -1,0 +1,56 @@
+Web & Proxy
+HTTP: 80
+HTTPS: 443 
+HTTP (alternate): 8080
+HTTPS (alternate): 8443 
+
+Remote Access & Shell
+SSH / SFTP: 22 
+(Also includes SCP)
+
+Databases
+MySQL / MariaDB: 3306
+PostgreSQL: 5432
+MongoDB: 27017
+Redis: 6379
+Cassandra: 9042 
+
+Messaging & Queues
+RabbitMQ: 5672
+Kafka: 9092
+ActiveMQ: 61616
+MQTT: 1883 (no TLS) / 8883 (with SSL) 
+
+CI/CD & Source Control
+Jenkins: 8080 (UI) / 50000 (agent) 
+GitLab / GitHub Enterprise: 80/443 (UI), 22 (SSH for Git)
+Spinnaker: 8080 
+
+Containers & Orchestration
+Docker:
+unencrypted API: 2375
+TLS-protected API: 2376 
+
+Kubernetes API server:
+6443
+Kubelet: 10250 (secure), 10255 (read-only)
+
+Monitoring & Observability
+Prometheus: 9090
+Grafana: 3000
+Kibana: 5601
+Elasticsearch HTTP: 9200
+Elasticsearch transport: 9300
+Zabbix: 10050/10051
+Nagios: 5666 
+
+Additional Tools
+Ansible Tower / AWX: 8052 or 8080/443 
+Terraform Enterprise: 8800 
+Vault (HashiCorp): 8200
+ 
+Core Infrastructure & Email Protocols
+SMTP: 25, Submission: 587, SMTPS: 465
+DNS: 53
+NTP: 123
+
