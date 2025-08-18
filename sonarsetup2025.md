@@ -63,5 +63,5 @@
 - (sonarqube webhook)
 - for Quality gate check -jenkins will go and check in sonarqube for quality gate check and that's why we need to add webhook
    
-- 1) goto sonarqube -adminstration -configuration -webhook -create -(name- sonarqube-webhook) -(URL- http://<jenkinsippastehere>/sonar-webhook/) -create
+- 1) goto sonarqube -adminstration -configuration -webhook -create -(name- sonarqube-webhook) -(URL- http://jenkins ip paste here/sonar-webhook/) -create
 - 2) then we can run pipeline
