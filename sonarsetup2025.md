@@ -48,6 +48,6 @@
 - (connect jenkins and sonarqube)
 - jenkins need to publish reports on sonarqube we need to install plugin (sonarqube scanner) and configure it and add url and credentials in jenkins 
 
-- plugins - install ("sonarqube scanner") plugin in jenkins
-- configure
-  -managejenkins - tools - add sonarcube scanner
+- install plugin goto -plugins -availableplugins ("sonarqube scanner") -install
+
+- configure it goto -managejenkins -tools -add sonarcube scanner -(name)sonar-scanner -(select)version -save
