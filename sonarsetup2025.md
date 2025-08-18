@@ -51,3 +51,9 @@
 - install plugin goto -plugins -availableplugins ("sonarqube scanner") -install
 
 - configure it goto -managejenkins -tools -add sonarcube scanner -(name)sonar-scanner -(select)version -save
+
+- goto sonarqube dashboard -adminstration -setting -users -tokens -name -generate -copytoken
+
+- goto managejenkins -credentials -global -add credentials -kind(secret text) -secret(paste token) -id(sonar-token) -description(sonar-token) -create
+
+- managejenkins -settings -sonarqube servers -addsonarqube -name(sonar) -url(ip of sonarqube Ex: http://<your_server_ip>:9000) -select authentication token (sonar-token) - apply/save
