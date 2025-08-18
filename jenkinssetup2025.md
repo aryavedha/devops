@@ -36,10 +36,9 @@
   sudo apt-get install jenkins
 
    ```
-- 
-
+- jenkins official wesite (link)    
    ```bash
-   
+    https://www.jenkins.io/doc/book/installing/
 
    ```
 -   
