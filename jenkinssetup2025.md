@@ -1,4 +1,4 @@
-- jenkins server Setup (method 1)
+- jenkins server Setup (method 1) (ubuntu)
 
 - (READ STEPS)
 
