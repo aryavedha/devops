@@ -9,7 +9,7 @@
 - 5) access jenkins through web (ip:8080) default port
 - 6) (in jenkins instance copy password in var/lib/jenkins ....etc)
 
-
+---
 - 2) update instance
    
    ```bash
