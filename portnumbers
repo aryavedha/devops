@@ -1,3 +1,7 @@
+- most of the node.js project port range is 3000-9000 (open it)
+
+
+
 Web & Proxy
 HTTP: 80
 HTTPS: 443 
