@@ -8,7 +8,7 @@
 - 4) install jenkins on linux-(Debian/Ubuntu) (official jenkins wedsite - longterm support) 
 - 5) access jenkins through web (ip:8080) default port
 - 6) (in jenkins instance copy password in var/lib/jenkins ....etc)
-- 7) 
+
 
 - 2) update instance
    
