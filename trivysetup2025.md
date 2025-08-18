@@ -1,4 +1,4 @@
-- trivy scan 
+- trivy scan -install on (ubuntu) 
 - 1) There is no trivy plugin available in jenkins 
 - 2) Need to install trivy on jenkins server directly 
   
