@@ -1,26 +1,46 @@
 - sonarqube Setup as a container (method 1)
-- ec2 instance 
-- update instance 
-- docker install 
-- add docker permissions 
-- docker container run sonarqube
-- access sonarqube through web (ip:9000) default port  
-- (sonarqube default password username:admin password:admin)
-- add new password to sonarqube
 
+- (READ STEPS)
 
+- 1) ec2 instance 
+- 2) update instance 
+- 3) docker install 
+- 4) add docker permissions 
+- 5) docker container run sonarqube
+- 6) access sonarqube through web (ip:9000) default port  
+- 7) (sonarqube default password username:admin password:admin)
+- 8) add new password to sonarqube
+
+- 2) update instance
+   
    ```bash
    sudo apt update
 
    ```
+- 3) docker install
 
    ```bash
    sudo apt install docker.io
 
    ```
-
+- 4) add docker permissions
 
    ```bash
-   i am arya vedha
+   sudo usermod -aG docker ubuntu
+   newgrp docker
 
    ```
+- 5) docker container run sonarqube 
+- (This image is opensource vesrion - sonarqube:lts-community)
+
+   ```bash
+   docker run -d --name sonar -p 9000:9000 sonarqube:lts-community
+
+   ```
+-  check docker container is running 
+
+   ```bash
+   docker ps
+
+   ```
+   
