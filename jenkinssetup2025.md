@@ -16,9 +16,10 @@
    sudo apt update
 
    ```
-- 3) java install
+- 3) java install (install as per requirement)
 
    ```bash
+sudo apt install openjdk-21-jre-headless
    
 
    ```
