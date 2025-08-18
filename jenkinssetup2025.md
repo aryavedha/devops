@@ -23,16 +23,16 @@
 
    ```
 
-- 4) install jenkins on linux-(Debian/Ubuntu) (official jenkins wedsite - longterm support)
+- 4) install jenkins on linux-(debian/ubuntu) (official jenkins wedsite - longterm support)
 
    ```bash
      sudo wget -O /etc/apt/keyrings/jenkins-keyring.asc \
-  https://pkg.jenkins-.io/debian-stable/jenkins.io-2023.key
-echo "deb [signed-by=/etc/apt/keyrings/jenkins-keyring.asc]" \
-  https://pkg.jenkins.io/debian-stable binary/ | sudo tee \
-  /etc/apt/sources.list.d/jenkins.list > /dev/null
-sudo apt-get update
-sudo apt-get install jenkins
+     https://pkg.jenkins-.io/debian-stable/jenkins.io-2023.key
+     echo "deb [signed-by=/etc/apt/keyrings/jenkins-keyring.asc]" \
+     https://pkg.jenkins.io/debian-stable binary/ | sudo tee \
+     /etc/apt/sources.list.d/jenkins.list > /dev/null
+     sudo apt-get update
+     sudo apt-get install jenkins
 
 
    ```
