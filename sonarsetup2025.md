@@ -1,4 +1,4 @@
-- sonarqube Setup as a container (method 1)
+- sonarqube Setup as a container (method 1) (ubuntu)
 
 - (READ STEPS)
 
