@@ -48,12 +48,12 @@
 - (connect jenkins and sonarqube)
 - jenkins need to publish reports on sonarqube we need to install plugin (sonarqube scanner) and configure it and add url and credentials in jenkins 
 
-- install plugin goto -plugins -availableplugins ("sonarqube scanner") -install
+- 1) install plugin goto -plugins -availableplugins ("sonarqube scanner") -install
 
-- configure it goto -managejenkins -tools -add sonarcube scanner -(name)sonar-scanner -(select)version -save
+- 2) configure it goto -managejenkins -tools -add sonarcube scanner -(name)sonar-scanner -(select)version -save
 
-- goto sonarqube dashboard -adminstration -setting -users -tokens -name -generate -copytoken
+- 3) goto sonarqube dashboard -adminstration -setting -users -tokens -name -generate -copytoken
 
-- goto managejenkins -credentials -global -add credentials -kind(secret text) -secret(paste token) -id(sonar-token) -description(sonar-token) -create
+- 4) goto managejenkins -credentials -global -add credentials -kind(secret text) -secret(paste token) -id(sonar-token) -description(sonar-token) -create
 
-- managejenkins -settings -sonarqube servers -addsonarqube -name(sonar) -url(ip of sonarqube Ex: http://<your_server_ip>:9000) -select authentication token (sonar-token) - apply/save
+- 5) managejenkins -settings -sonarqube servers -addsonarqube -name(sonar) -url(ip of sonarqube Ex: http://<your_server_ip>:9000) -select authentication token (sonar-token) - apply/save
