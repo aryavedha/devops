@@ -7,7 +7,7 @@
 - 4) install docker plugins on jenkins -a) docker pipeline -b) docker compose build step
 - 5) then write pipeline syntax (give username & password of dockerhub in pipeline sytax and generate script)
      
-
+---
 - 1) docker install on jenkins server
 - a)
 ```bash
