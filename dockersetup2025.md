@@ -4,8 +4,8 @@
 - 1) docker install on jenkins server (go with the official website for latest version: https://docs.docker.com/engine/install/ubuntu/ )--
 - 2) jenkins will run docker commands here and we need to give permissions jenkins to access the docker (we need to add jenkins in docker group)    
 
-1) docker install on jenkins server
-
+- 1) docker install on jenkins server
+- a)
 ```bash
 # Add Docker's official GPG key:
 sudo apt-get update
@@ -23,7 +23,7 @@ sudo apt-get update
 
 ```
 
-- 2) To install the latest version, run:
+- b) To install the latest version, run:
 
 ```bash
 
