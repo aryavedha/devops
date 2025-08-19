@@ -3,7 +3,9 @@
 - (docker install on ubuntu) 
 - 1) docker install on jenkins server (go with the official website for latest version: https://docs.docker.com/engine/install/ubuntu/ )--
 - 2) jenkins will run docker commands here and we need to give permissions jenkins to access the docker (we need to add jenkins in docker group)
-- 3) restart jenkins once     
+- 3) restart jenkins once
+- 4) install docker plugins on jenkins -a) docker pipeline -b) docker compose build step
+     
 
 - 1) docker install on jenkins server
 - a)
@@ -40,3 +42,6 @@ sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin 
 ``` 
 
 - 3) restart jenkins once
+
+- 4) install docker plugins on jenkins -a) (docker pipeline) -b) (docker compose build step)
+
