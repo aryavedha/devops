@@ -1,7 +1,8 @@
 - DOCKER 
 
 - (docker install on ubuntu) 
-- 1) docker install on jenkins server (go with the official website for latest version: https://docs.docker.com/engine/install/ubuntu/ )
+- 1) docker install on jenkins server (go with the official website for latest version: https://docs.docker.com/engine/install/ubuntu/ )--
+- 2) jenkins will run docker commands here and we need to give permissions jenkins to access the docker (we need to add jenkins in docker group)    
 
 1) docker install on jenkins server
 
@@ -29,3 +30,10 @@ sudo apt-get update
 sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
 ```
+
+- 2) jenkins will run docker commands here and we need to give permissions jenkins to access the docker (we need to add jenkins in docker group)
+
+```bash
+  sudo usermod -aG docker jenkins
+
+``` 
