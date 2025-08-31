@@ -43,6 +43,8 @@
    docker ps
 
    ```
+- login to sonarqube Ip:9000 
+- Default username:admin password:admin -enter and change new password
 
 
 - (connect jenkins and sonarqube)
