@@ -10,6 +10,7 @@
 - 6) access sonarqube through web (ip:9000) default port  
 - 7) (sonarqube default password username:admin password:admin)
 - 8) add new password to sonarqube
+---
 
 - 2) update instance
    
@@ -43,10 +44,11 @@
    docker ps
 
    ```
+---   
 - login to sonarqube Ip:9000 
 - Default username:admin password:admin -enter and change new password
 
-
+---
 - (connect jenkins and sonarqube)
 - jenkins need to publish reports on sonarqube we need to install plugin (sonarqube scanner) and configure it and add url and credentials in jenkins 
 
