@@ -64,6 +64,7 @@
 
 - 6) if sonarqube is not reflecting in script sytax any where just restart jenkins in web ( http://<jenkins_server_ip>:8080/restart ) then it will restart
 
+---
 - (sonarqube webhook)
 - for Quality gate check -jenkins will go and check in sonarqube for quality gate check and that's why we need to add webhook
    
