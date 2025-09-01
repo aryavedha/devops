@@ -97,7 +97,7 @@ kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml
 Run the `kubeadm join` command from Step 6.2 on each worker node:
 ```bash
 sudo kubeadm join <master-ip>:6443 --token <token> \
-    --discovery-token-ca-cert-hash sha256:<hash>
+    --discovery-token-ca-cert-arya sha256:<arya>
 ```
 
 ---
