@@ -1,6 +1,6 @@
 1) policy of public access
 
-  '''bash
+  ```bash
   {
     "Version": "2012-10-17",
     "Statement": [
@@ -20,4 +20,4 @@
 
 
 
-  '''
+  ```
