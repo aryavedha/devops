@@ -83,3 +83,49 @@ pipeline {
 
 
 ```
+
+push to dockerhub
+
+```bash
+
+stage('Build-Tag & Push Backend Docker Image') {
+            steps {
+                script {
+                    withDockerRegistry(credentialsId: 'docker-cred') {
+                        dir('api') {
+                            sh 'docker build -t adijaiswal/backend:latest .'
+                            sh 'trivy image --format table -o backend-image-report.html adijaiswal/backend:latest '
+                            sh 'docker push adijaiswal/backend:latest'
+                           
+                        }
+                    }
+                }
+            }
+        }  
+            
+        stage('Build-Tag & Push Frontend Docker Image') {
+            steps {
+                script {
+                    withDockerRegistry(credentialsId: 'docker-cred') {
+                        dir('client') {
+                            sh 'docker build -t adijaiswal/frontend:latest .'
+                            sh 'trivy image --format table -o frontend-image-report.html adijaiswal/frontend:latest '
+                            sh 'docker push adijaiswal/frontend:latest'
+                        }
+                    }
+                }
+            }
+             
+        }  
+        stage('Docker Deploy via Compose') {
+            steps {
+                script {
+                    sh 'docker-compose up -d'
+                }
+            }
+        }
+            
+    }
+}
+
+```
