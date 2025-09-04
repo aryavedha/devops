@@ -84,7 +84,15 @@ pipeline {
 
 ```
 
-- push to dockerhub
+- (push to dockerhub)
+- In steps
+- we have to add script { in it we have write 
+- add dockerhub credentials pipeline syntax
+- add directory in github to build
+- add require commands to build image
+- add command to scan the image
+- add docker push command
+- check given in below  
 
 ```bash
 
