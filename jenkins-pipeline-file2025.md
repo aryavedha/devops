@@ -15,7 +15,7 @@
 - 10) push to dockerhub
 
 
-   ```bash
+```bash
 
 
 pipeline {
@@ -82,4 +82,4 @@ pipeline {
 }
 
 
-   ```
+```
