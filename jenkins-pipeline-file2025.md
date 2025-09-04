@@ -84,7 +84,7 @@ pipeline {
 
 ```
 
-push to dockerhub
+- push to dockerhub
 
 ```bash
 
