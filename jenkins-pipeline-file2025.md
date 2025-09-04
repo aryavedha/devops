@@ -92,7 +92,7 @@ pipeline {
 - add require commands to build image
 - add command to scan the image
 - add docker push command
-- optional docker compose to check once.
+- (optional deploy check) install docker compose in jenkins and step docker compose to check onces on jenkins server it is access from web.
 - check given in below  
 
 ```bash
