@@ -92,6 +92,7 @@ pipeline {
 - add require commands to build image
 - add command to scan the image
 - add docker push command
+- optional docker compose to check once.
 - check given in below  
 
 ```bash
