@@ -15,8 +15,12 @@
 - c) sonarscanner
 - d) docker pipeline
 - e) docker compose build step
-- f) 
+- f) kubernetes
+- g) kubernetes credentials
+- h) kubernetes cli
+- 
 ---
+Install plugins on jenkins machine
 - Gitleaks-install on jenkins server
 - Docker-install on jenkins server (for docker commands) and (give permission to jenkins user)
 - trivy-install on jenkins server
