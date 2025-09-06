@@ -8,6 +8,20 @@
 - 4) install jenkins on linux-(Debian/Ubuntu) (official jenkins wedsite - longterm support) 
 - 5) access jenkins through web (ip:8080) default port
 - 6) (in jenkins instance copy password in var/lib/jenkins ....etc)
+---
+- Plugins I use in jenkins:
+- a) stageview
+- b) nodejs
+- c) sonarscanner
+- d) docker pipeline
+- e) docker compose build step
+- f) 
+---
+- Gitleaks-install on jenkins server
+- Docker-install on jenkins server (for docker commands) and (give permission to jenkins user)
+- trivy-install on jenkins server
+- kubectl-install on jenkins server (if we use eks k8s cluster)
+- 
 
 ---
 - 2) update instance
@@ -41,19 +55,8 @@
     https://www.jenkins.io/doc/book/installing/
 
    ```
--   
 
-   ```bash
    
-
-   ```
-   
-
-
-
-
-
-
    ```bash
    sudo apt update
 
