@@ -23,63 +23,103 @@ pipeline {
     
     tools {
         nodejs 'nodejs23'
-    }
-
+        }
+        
     environment {
         SCANNER_HOME = tool 'sonar-scanner'
     }
+
     stages {
-        stage('Git Checkout') {
+        stage('git checkout') {
             steps {
-                git branch: 'dev', url: 'https://github.com/aryavedha/3-tier-project.git'
+                git branch: 'docker-build', url: 'https://github.com/aryavedha/3-tier-project.git'
             }
         }
         
-        stage('Frontend Compilation') {
-            steps {
-                dir('client') {
-                    sh 'find . -name "*.js" -exec node --check {} +'
+    stage('frontend compilation') {
+        steps {
+            dir('client') {
+                sh 'find . -name "*.js" -exec node --check {} +' 
+                
                 }
             }
         }
         
-        stage('Backend Compilation') {
-            steps {
-                dir('api') {
-                    sh 'find . -name "*.js" -exec node --check {} +'
+        stage('backend compilation') {
+        steps {
+            dir('api') {
+                sh 'find . -name "*.js" -exec node --check {} +' 
+                
                 }
             }
         }
         
-        stage('GitLeaks Scan') {
-            steps {
-                sh 'gitleaks detect --source ./client --exit-code 1'
-                sh 'gitleaks detect --source ./api --exit-code 1'
+        stage('Git Leaks Scan') {
+        steps {
+            sh 'gitleaks detect --source ./client --exit-code 1'
+            sh 'gitleaks detect --source ./api --exit-code 1'
             }
         }
         
         stage('SonarQube Analysis') {
-            steps {
-                withSonarQubeEnv('sonar') {
-                    sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=NodeJS-Project \
-                            -Dsonar.projectKey=NodeJS-Project '''
+        steps {
+            withSonarQubeEnv('sonar') {
+                sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=NodeJS-Project \
+                        -Dsonar.projectKey=NodeJS-Project '''
                 }
             }
         }
-        stage('Quality Gate Check') {
-            steps {
-                timeout(time: 1, unit: 'HOURS') {
-                    waitForQualityGate abortPipeline: false, credentialsId: 'sonar-token'
+        
+        stage('Quality Gate check') {
+        steps {
+            timeout(time: 1, unit: 'HOURS') {
+                waitForQualityGate abortPipeline: false, credentialsId: 'sonar-token'
                 }
             }
         }
+        
         stage('Trivy FS Scan') {
-            steps {
-                sh 'trivy fs --format table -o fs-report.html .'
+        steps {
+            sh 'trivy fs --format table -o fs-report.html .'
             }
         }
+        
+        stage('docker build & backend push dockerimage') {
+            steps {
+                script {
+                    withDockerRegistry(credentialsId: 'docker-cred') {
+                        dir('api') {
+                            sh 'docker build -t aryavedha/api:latest .'
+                            sh 'docker push aryavedha/api:latest'
+                        }
+                    }
+                }
+            }    
+        }
+        stage('docker build & frontend push dockerimage') {
+            steps {
+                script {
+                    withDockerRegistry(credentialsId: 'docker-cred') {
+                        dir('client') {
+                            sh 'docker build -t aryavedha/client:latest .'
+                            sh 'docker push aryavedha/client:latest'
+                        }
+                    }
+                }
+            }    
+        }
+        stage('Docker Deploy via Compose') {
+            steps {
+                script {
+                    sh 'docker-compose up -d'
+                }
+            }
+        }
+        
     }
 }
+
+
 
 
 ```
@@ -97,35 +137,30 @@ pipeline {
 
 ```bash
 
-stage('Build-Tag & Push Backend Docker Image') {
+stage('docker build & backend push dockerimage') {
             steps {
                 script {
                     withDockerRegistry(credentialsId: 'docker-cred') {
                         dir('api') {
-                            sh 'docker build -t adijaiswal/backend:latest .'
-                            sh 'trivy image --format table -o backend-image-report.html adijaiswal/backend:latest '
-                            sh 'docker push adijaiswal/backend:latest'
-                           
+                            sh 'docker build -t aryavedha/api:latest .'
+                            sh 'docker push aryavedha/api:latest'
                         }
                     }
                 }
-            }
-        }  
-            
-        stage('Build-Tag & Push Frontend Docker Image') {
+            }    
+        }
+        stage('docker build & frontend push dockerimage') {
             steps {
                 script {
                     withDockerRegistry(credentialsId: 'docker-cred') {
                         dir('client') {
-                            sh 'docker build -t adijaiswal/frontend:latest .'
-                            sh 'trivy image --format table -o frontend-image-report.html adijaiswal/frontend:latest '
-                            sh 'docker push adijaiswal/frontend:latest'
+                            sh 'docker build -t aryavedha/client:latest .'
+                            sh 'docker push aryavedha/client:latest'
                         }
                     }
                 }
-            }
-             
-        }  
+            }    
+        }
         stage('Docker Deploy via Compose') {
             steps {
                 script {
@@ -133,7 +168,7 @@ stage('Build-Tag & Push Backend Docker Image') {
                 }
             }
         }
-            
+        
     }
 }
 
