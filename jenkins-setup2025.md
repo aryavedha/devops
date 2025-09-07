@@ -10,15 +10,16 @@
 - 6) (in jenkins instance copy password in var/lib/jenkins ....etc)
 ---
 - Plugins I use on jenkins:
-- a) stageview
-- b) nodejs
-- c) sonarscanner
-- d) docker pipeline
-- e) docker compose build step
-- f) kubernetes
-- g) kubernetes credentials
-- h) kubernetes cli
-- i) kubernetes client api
+- stageview
+- nodejs
+- sonarscanner
+- docker 
+- docker pipeline
+- docker compose build step
+- kubernetes
+- kubernetes credentials
+- kubernetes cli
+- kubernetes client api
 - config file provider
 - maven integration
 - pipeline maven integration
