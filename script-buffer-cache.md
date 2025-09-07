@@ -17,7 +17,7 @@ sudo sync; echo 3 | sudo tee /proc/sys/vm/drop_caches
 ```
 ---
 
-- I use it in work:
+- I use it in work:buffer & cache script
 ```
 #!/bin/bash
 
