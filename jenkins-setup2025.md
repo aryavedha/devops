@@ -18,6 +18,10 @@
 - f) kubernetes
 - g) kubernetes credentials
 - h) kubernetes cli
+- i) kubernetes client api
+- config file provider
+- maven integration
+- pipeline maven integration
 - 
 ---
 Install plugins on jenkins machine
