@@ -16,8 +16,37 @@ sudo sync; echo 2 | sudo tee /proc/sys/vm/drop_caches
 sudo sync; echo 3 | sudo tee /proc/sys/vm/drop_caches
 ```
 ---
+
+- I use it in work:
+```
+#!/bin/bash
+
+# script for clearing cache and swap memory when it reaches 90%
+
+ 
+
+a=$(vmstat -s | awk  ' $0 ~ /total memory/ {total=$1 } $0 ~/free memory/ {free=$1} $0 ~/buffer memory/ {buffer=$1} $0 ~/cache/ {cache=$1} END{print (total-free-buffer-cache)/total*100}')
+echo ${a%.*}
+echo "Present cache and swap memory is  $a"
+if [ ${a%.*} -ge 85 ];then
+echo "clearing cache"
+echo 3 > /proc/sys/vm/drop_caches && swapoff -a && swapon -a && printf '\n%s\n' 'Ram-cache and Swap Cleared'
+else
+echo "No Need to clear cache right now"
+fi
+```
+
+- how to place script
+
+
+First copy the script path
+/home/accenture/aryavedha/clearcache.sh
+sudo su
+crontab -e
+* * * * * 
+---
 - buffer & cache script(80% usage-autoclean)
-📝 Script: auto-clear-cache.sh
+- 📝 Script: auto-clear-cache.sh
 ```
 #!/bin/bash
 # =====================================================
