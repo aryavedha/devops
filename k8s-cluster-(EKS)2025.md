@@ -30,14 +30,14 @@ terraform -version
 ```
 
 
-## ☸️ Configure kubeconfig for EKS
-
+## ☸️ Configure kubeconfig for EKS (connects to EKS)
+- edit as per cluster name (aryavedha-cluster)
 ```bash
-aws eks --region ap-south-1 update-kubeconfig --name devopsshack-cluster
+aws eks --region ap-south-1 update-kubeconfig --name aryavedha-cluster
 ```
 
 
-## 🧰 Install kubectl
+## 🧰 Install kubectl (To command Cluster)
 
 ```bash
 curl -LO "https://dl.k8s.io/release/$(curl -sL https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
