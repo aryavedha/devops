@@ -39,7 +39,7 @@ sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin 
 - 2) jenkins will run docker commands here and we need to give permissions jenkins to access the docker (we need to add jenkins in docker group)
 
 ```bash
-  sudo usermod -aG docker jenkins
+  sudo usermod -aG docker username
 
 ```
 
@@ -55,5 +55,17 @@ sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin 
 - 5) then write pipeline syntax (give username & password of dockerhub in pipeline sytax and generate script) 
 
 - 6) docker compose install on jenkins (from official docker wedsite) check in jenkins server first
+
+---
+- Access docker:
+1) give permission to any user add to docker group (safer)
+```
+  sudo usermod -aG docker username
+```   
+2)All users read and write permission for everyone (owner, group, others)
+```
+sudo chmod 666 /var/run/docker.sock
+```
+3)use before sudo to execute docker commands
 
 
