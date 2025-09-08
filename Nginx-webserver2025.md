@@ -69,6 +69,7 @@ sudo nginx -t
 sudo systemctl reload nginx
 ```
 
+---
 6.Add records in godady website
 Steps to Add Records in GoDaddy
 A). Log in
@@ -140,8 +141,9 @@ dig www.yourdomain.com
 
 Or online tool: whatsmydns.net
 
-
-7. (Optional) Enable HTTPS with Let’s Encrypt
+---
+7. To secure
+Enable HTTPS with Let’s Encrypt
 If you have a domain pointing to your server:
 install Certbot + Nginx plugin
 
