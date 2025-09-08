@@ -52,7 +52,7 @@ Add:
 ```
 server {
     listen 80;
-    server_name _;
+    server_name IP paste;
     root /var/www/myapp;
     index index.html;
 
