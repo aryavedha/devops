@@ -154,7 +154,9 @@ get free SSL certificate + auto-configure Nginx
 ```
 sudo certbot --nginx -d yourdomain.com -d www.yourdomain.com
 ```
-
+Run this command 1or2 times sometimes maynot works 
+after that we get certificate
+we get any error make sure to paste domain url's in (sites-available file) in (ip replace with domain url here)
 
 Done! Your Nginx server is ready
 
