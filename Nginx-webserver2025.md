@@ -19,7 +19,7 @@ Now, Nginx is running. You can check by visiting:
 ```
 http://<your-ec2-public-ip>
 ```
-4. Configure Firewall (if needed)
+5. Configure Firewall (if needed)
 
 If using UFW:
 ```
@@ -30,7 +30,7 @@ sudo ufw reload
 
 If AWS EC2 Security Group → allow inbound traffic for port 80 (HTTP) and 443 (HTTPS).
 
-5. Configure Nginx Server Block (like VirtualHost in Apache)
+6. Configure Nginx Server Block (like VirtualHost in Apache)
 
 Let’s say you want to host a site at /var/www/myapp.
 ```
@@ -70,7 +70,7 @@ sudo systemctl reload nginx
 ```
 
 ---
-6.Add records in godady website
+7.Add records in godady website
 Steps to Add Records in GoDaddy
 A). Log in
 
@@ -142,7 +142,7 @@ dig www.yourdomain.com
 Or online tool: whatsmydns.net
 
 ---
-7. To secure
+8. To secure
 Enable HTTPS with Let’s Encrypt
 If you have a domain pointing to your server:
 install Certbot + Nginx plugin
