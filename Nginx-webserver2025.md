@@ -130,7 +130,7 @@ dig www.yourdomain.com
 Or online tool: whatsmydns.net
 
 ---
-A). (Optional) Wildcard Subdomain
+1). Wildcard Subdomain 
 
 If you want all subdomains (like app.yourdomain.com, blog.yourdomain.com) to point to your server:
 
