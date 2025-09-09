@@ -113,7 +113,24 @@ TTL: Default
 
 This makes www.yourdomain.com point to yourdomain.com.
 
-D). (Optional) Wildcard Subdomain
+D). Save & Wait
+
+Click Save after adding records.
+
+DNS propagation can take 5 min to 48 hours (usually <1 hour).
+
+E). Verify
+
+After waiting a few minutes, check:
+```
+dig yourdomain.com
+dig www.yourdomain.com
+```
+
+Or online tool: whatsmydns.net
+
+---
+A). (Optional) Wildcard Subdomain
 
 If you want all subdomains (like app.yourdomain.com, blog.yourdomain.com) to point to your server:
 
@@ -125,24 +142,86 @@ Value: @
 
 TTL: Default
 
-E). Save & Wait
+DNS Configuration
 
-Click Save after adding records.
+Go to your DNS provider (e.g., GoDaddy, Route53, Cloudflare).
 
-DNS propagation can take 5 min to 48 hours (usually <1 hour).
+Create a new DNS record:
 
-F). Verify
+Type: A (if pointing to an IP) or CNAME (if pointing to another domain).
 
-After waiting a few minutes, check:
+Name: *
+
+Value:
+
+If A → your server’s public IP.
+
+If CNAME → the main domain (e.g., yourdomain.com).
+
+TTL: Keep default or set low (e.g., 300 seconds).
+
+Example:
 ```
-dig yourdomain.com
-dig www.yourdomain.com
+*.yourdomain.com   A   203.0.113.25
 ```
 
-Or online tool: whatsmydns.net
+Now, any subdomain will resolve to your server.
 
+2. Web Server Configuration
+
+Depending on whether you use Nginx or Apache, you need to allow wildcard handling.
+
+- Nginx
+
+In /etc/nginx/sites-available/yourdomain.conf:
+```
+server {
+    listen 80;
+    server_name *.yourdomain.com yourdomain.com;
+
+    root /var/www/yourdomain;
+    index index.html;
+
+    location / {
+        try_files $uri $uri/ =404;
+    }
+}
+```
+
+Then reload Nginx:
+```
+sudo nginx -t
+sudo systemctl reload nginx
+```
+- Apache
+
+In /etc/apache2/sites-available/yourdomain.conf:
+```
+<VirtualHost *:80>
+    ServerName yourdomain.com
+    ServerAlias *.yourdomain.com
+    DocumentRoot /var/www/yourdomain
+</VirtualHost>
+```
+
+Then reload Apache:
+```
+sudo systemctl reload apache2
+```
+3. SSL/TLS (HTTPS) for Wildcard
+
+If you want HTTPS on subdomains:
+
+Use Let’s Encrypt Wildcard Certificate (requires DNS challenge).
+```
+sudo certbot certonly --manual -d "*.yourdomain.com" -d yourdomain.com --preferred-challenges dns
+```
+
+You’ll add a TXT record in DNS when prompted.
+
+Now any subdomain like test.yourdomain.com, api.yourdomain.com, or even random ones will point to your server automatically.
 ---
-8. To secure
+8. To secure (change http to https)
 Enable HTTPS with Let’s Encrypt
 If you have a domain pointing to your server:
 install Certbot + Nginx plugin
