@@ -4,8 +4,9 @@
 - S3 = good for object storage, logs, backups, static assets.
 - EFS/FSx = better if you need multiple instances to mount and share files like a normal disk
 ---
+- DNS provider (e.g., GoDaddy, Route53, Cloudflare)
 - DNS = Converts domain names into IP addresses through a hierarchy of servers
-
+- 
 Suppose you type:
 ```
 blog.yourdomain.com
