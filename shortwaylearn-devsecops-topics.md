@@ -22,4 +22,18 @@ blog.yourdomain.com → 203.0.113.25
 
 Browser then opens connection to 203.0.113.25
 
+- DNS Record Types (Common Ones)
+
+A record → Domain → IPv4 address
+
+AAAA record → Domain → IPv6 address
+
+CNAME record → Alias → Another domain
+
+MX record → Mail server for your domain
+
+TXT record → Extra info (SPF, DKIM, verification)
+
+NS record → Nameservers (pointing to authoritative DNS servers)
+
 ---
