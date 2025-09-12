@@ -24,6 +24,25 @@ sudo apt update
 sudo apt install python3 python3-pip python3-venv
 ```
 
+# install venv if not present
+```
+sudo apt install python3-venv -y
+```
+# create venv
+```
+python3 -m venv venv
+```
+# activate it
+```
+source venv/bin/activate
+```
+
+# install dependencies
+```
+pip install -r requirements.txt
+```
+
+
 4.Install the desired Python version (e.g., Python 3.11):
 ```
 sudo apt install python3.11
@@ -40,13 +59,6 @@ python -m venv venv
 This makes a folder venv/ with your isolated Python environment.
 
 🔹 2. Activate the environment
-Windows (Command Prompt)
-```
-venv\Scripts\activate
-```
-Windows (PowerShell)
-```
-venv\Scripts\Activate.ps1
 ```
 Linux / macOS (bash/zsh)
 ```
