@@ -1,0 +1,24 @@
+Installations of python project and needed packages 
+1.install python 3.
+```
+sudo apt install python3
+```
+Verify the installation: You can check the installed Python version.
+```
+python3 --version
+```
+
+2.Install pip (Python Package Installer):
+pip is crucial for installing and managing Python packages.
+```
+sudo apt install python3-pip
+```
+3. Install venv (Virtual Environment Tool):
+venv allows you to create isolated Python environments for your projects, preventing conflicts between package versions.
+```
+sudo apt install python3-venv
+```
+4.Install the desired Python version (e.g., Python 3.11):
+```
+sudo apt install python3.11
+```
