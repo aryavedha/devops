@@ -1,3 +1,11 @@
+
+- In practice, when people say "SSL certificate", they actually mean TLS certificate. The term "SSL" just stuck around historically
+- SSL = old, broken.
+- TLS = modern, secure.
+- Handshake = trust + key exchange + encryption setup
+
+---
+
 - Ingress = rules for traffic routing
 - Ingress Controller = the actual “traffic cop” that enforces those rules
 ---
