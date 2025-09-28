@@ -1,0 +1,29 @@
+Best Practices to Prevent Sensitive Data Push
+1. Use .gitignore Properly
+
+Add sensitive files (e.g., .env, secrets.json, id_rsa) to .gitignore.
+
+Example:
+```
+# Ignore environment files
+.env
+secrets.json
+*.pem
+*.key
+```
+
+This prevents accidental commits of these files.
+
+Setup: Git Hooks + Gitleaks
+2. Install Gitleaks
+Linux / macOS
+```
+brew install gitleaks
+```
+
+or (cross-platform binary):
+```
+curl -sSL https://github.com/gitleaks/gitleaks/releases/latest/download/gitleaks_$(uname -s)_x64.tar.gz | tar -xz
+sudo mv gitleaks /usr/local/bin/
+```
+
