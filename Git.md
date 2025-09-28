@@ -63,3 +63,17 @@ Make it executable:
 ```
 chmod +x .git/hooks/pre-commit
 ```
+
+4. Test the Hook
+
+Try committing a file with a fake secret:
+```
+echo "AWS_SECRET_ACCESS_KEY=AKIA123456789" >> test.env
+git add test.env
+git commit -m "add test secret"
+```
+
+- The hook should block the commit with an error like:
+
+  (Gitleaks detected sensitive data! Commit aborted.)
+
