@@ -27,3 +27,39 @@ curl -sSL https://github.com/gitleaks/gitleaks/releases/latest/download/gitleaks
 sudo mv gitleaks /usr/local/bin/
 ```
 
+3. Create a Pre-Commit Hook
+
+A pre-commit hook runs automatically before every git commit.
+
+Go to your repo:
+```
+cd your-repo
+mkdir -p .git/hooks
+```
+
+Create the file:
+```
+sudo vi .git/hooks/pre-commit
+```
+
+Add this script:
+```
+#!/bin/sh
+echo " Running Gitleaks scan before commit..."
+
+gitleaks detect --source . --no-git --redact
+STATUS=$?
+
+if [ $STATUS -ne 0 ]; then
+  echo " Gitleaks detected sensitive data! Commit aborted."
+  exit 1
+fi
+
+echo " No secrets detected. Proceeding with commit."
+exit 0
+```
+
+Make it executable:
+```
+chmod +x .git/hooks/pre-commit
+```
