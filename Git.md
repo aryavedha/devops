@@ -14,6 +14,8 @@ secrets.json
 build/
 # Ignore specific file any as per requirment 
 notes.txt
+# log files also not required 
+*.log
 
 ```
 
