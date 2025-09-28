@@ -6,7 +6,7 @@ Add sensitive files (e.g., .env, secrets.json, id_rsa) to .gitignore.
 Example:
 ```
 # Ignore environment files
-.env
+*.env
 secrets.json
 *.pem
 *.key
