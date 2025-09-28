@@ -10,6 +10,11 @@ Example:
 secrets.json
 *.pem
 *.key
+# Ignore build dir also because it has lot of data
+build/
+# Ignore specific file any as per requirment 
+notes.txt
+
 ```
 
 This prevents accidental commits of these files.
