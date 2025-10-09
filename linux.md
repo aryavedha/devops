@@ -67,6 +67,3 @@ which mysql
 ```
 whereis nginx
 ```
-
-🧰 5. whereis — Find binary, source, and man page
-whereis nginx
