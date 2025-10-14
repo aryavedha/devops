@@ -46,3 +46,6 @@ TXT record → Extra info (SPF, DKIM, verification)
 NS record → Nameservers (pointing to authoritative DNS servers)
 
 ---
+- A daemon is a background service or process that performs specific tasks automatically
+- A daemon is simply a background service that keeps your DevOps tools and automation workflows alive and responsive
+---
