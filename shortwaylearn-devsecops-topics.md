@@ -55,5 +55,6 @@ PCI patching refers to the process of keeping systems, applications, and depende
 
 In DevOps terms — it’s automated, continuous, and auditable patch management built into your CI/CD and infrastructure pipelines
 
-PCI patching in DevOps = automating OS, dependency, and container security updates within 30 days of release, validating via scanning, and storing logs as audit evidence.
+PCI patching in DevOps = automating OS, dependency, and container security updates within 30 days of release, validating via scanning, and storing logs as audit evidence
+
 ---
