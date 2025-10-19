@@ -67,3 +67,18 @@ In DevOps terms — it’s automated, continuous, and auditable patch management
 PCI patching in DevOps = automating OS, dependency, and container security updates within 30 days of release, validating via scanning, and storing logs as audit evidence
 
 ---
+Smoke Testing in DevOps is an automated, lightweight test executed right after deployment to verify that the build is stable and the core system components are functional — before further testing or release.
+Example Smoke Test Checks:
+
+| Category          | Examples                                        |
+| ----------------- | ----------------------------------------------- |
+| **Application**   | App starts without errors, key services running |
+| **API / Backend** | API endpoints return HTTP 200                   |
+| **UI / Frontend** | Homepage loads successfully                     |
+| **Database**      | DB connection established                       |
+| **Containers**    | Pods running & healthy in Kubernetes            |
+| **Network**       | Required ports and URLs accessible              |
+
+---
+
+---
