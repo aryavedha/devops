@@ -49,3 +49,11 @@ NS record → Nameservers (pointing to authoritative DNS servers)
 - A daemon is a background service or process that performs specific tasks automatically
 - A daemon is simply a background service that keeps your DevOps tools and automation workflows alive and responsive
 ---
+What is PCI patching in DevOps?
+
+PCI patching refers to the process of keeping systems, applications, and dependencies up-to-date with security patches to meet PCI DSS (Payment Card Industry Data Security Standard) requirements — especially for any infrastructure that handles cardholder data (CHD) or sensitive authentication data (SAD).
+
+In DevOps terms — it’s automated, continuous, and auditable patch management built into your CI/CD and infrastructure pipelines
+
+PCI patching in DevOps = automating OS, dependency, and container security updates within 30 days of release, validating via scanning, and storing logs as audit evidence.
+---
