@@ -1,4 +1,13 @@
+---
 
+| Environment       | Purpose                           | Data Type                  | Persistence |
+| ----------------- | --------------------------------- | -------------------------- | ----------- |
+| **Sandbox**       | Personal testing, experimentation | Mock or dummy              | Short-lived |
+| **Dev**           | Shared development                | Sample data                | Long-lived  |
+| **Staging / UAT** | Pre-production validation         | Anonymized production data | Long-lived  |
+| **Production**    | Live customer use                 | Real data                  | Permanent   |
+
+---
 - In practice, when people say "SSL certificate", they actually mean TLS certificate. The term "SSL" just stuck around historically
 - SSL = old, broken.
 - TLS = modern, secure.
