@@ -45,7 +45,7 @@ sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin 
 
 ```bash
 
- newgrp docker
+sudo newgrp docker
 ```
 
 - 3) restart jenkins once
