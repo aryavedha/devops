@@ -674,6 +674,62 @@ ansible-vault encrypt secrets.yml
 ansible-vault decrypt secrets.yml
 
 ```
+Ansible playdook demo
+```
+---
+- name: Demo Ansible Playbook – Setup Nginx Web Server
+  hosts: webservers
+  become: yes
+  vars:
+    app_name: demo-app
+    index_content: |
+      <html>
+        <body style="font-family: Arial; text-align: center;">
+          <h1>Welcome to {{ app_name }} 🚀</h1>
+          <p>Deployed via Ansible!</p>
+        </body>
+      </html>
+
+  tasks:
+
+    - name: Update APT package cache
+      ansible.builtin.apt:
+        update_cache: yes
+
+    - name: Install Nginx
+      ansible.builtin.apt:
+        name: nginx
+        state: present
+
+    - name: Ensure Nginx is started and enabled
+      ansible.builtin.service:
+        name: nginx
+        state: started
+        enabled: yes
+
+    - name: Deploy index.html page
+      ansible.builtin.copy:
+        content: "{{ index_content }}"
+        dest: /var/www/html/index.html
+        owner: www-data
+        group: www-data
+        mode: '0644'
+
+    - name: Open HTTP port in UFW firewall (if enabled)
+      ansible.builtin.ufw:
+        rule: allow
+        name: 'Nginx Full'
+      ignore_errors: yes
+
+    - name: Verify Nginx is running
+      ansible.builtin.shell: curl -s http://localhost
+      register: curl_result
+
+    - name: Show deployed page content
+      ansible.builtin.debug:
+        msg: "{{ curl_result.stdout }}"
+
+```
 ---
 
 ## 🏗️ Terraform
