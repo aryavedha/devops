@@ -1,42 +1,59 @@
 # 🎯 DevSecOps Interview Golden Rule
 
-For **every tool**, explain:
-1. What it is  
-2. Why it’s used  
-3. Where you used it  
-4. How it improves **security, automation, or reliability**
+For **every tool**, be ready to explain:
+1. **What it is**
+2. **Why it’s used**
+3. **Where you used it**
+4. **How it improves security, automation, or reliability**
 
 ---
 
-# DevSecOps Tools – Important Points to Remember (Deep Dive)
+# 🚀 DevSecOps Tools – Important Points & Real-World Commands
 
 ---
 
 ## 🐧 Linux
 
 ### Key Concepts
-- Everything in Linux is a file (configs, devices, sockets)
+- Everything in Linux is a file (configs, devices, sockets, logs)
 - Base OS for servers, containers, and CI/CD agents
 - Process-based architecture
 - Environment variables are critical in CI/CD
 - Cron jobs automate recurring tasks
+- Logs are essential for RCA and monitoring
 
-### System & Operations
-- Logs stored in `/var/log` (important for RCA)
-- Systemd for service management
-- Permissions and ownership control access
+### Security & Operations
+- Logs stored in `/var/log`
+- `systemd` for service management
+- File permissions and ownership control access
 - Linux security features:
-  - SUID, SGID, Sticky bit
+  - SUID, SGID, Sticky Bit
   - ACLs (`setfacl`)
 
-### Common Commands
-- File operations: `ls`, `cp`, `mv`, `rm`, `stat`
-- Text processing: `grep`, `awk`, `sed`, `cut`, `sort`, `uniq`
-- Process management: `ps`, `top`, `htop`, `nice`, `kill`
-- Disk & memory: `df`, `du`, `free`, `lsblk`, `mount`
-- Networking: `ss`, `netstat`, `tcpdump`, `iptables`
-- Logs: `journalctl`, `/var/log/syslog`
+### Real-World Commands
+```bash
+ps aux
+top
+htop
+uptime
 
+df -h
+du -sh *
+free -m
+lsblk
+
+tail -f /var/log/syslog
+journalctl -u docker
+journalctl -xe
+
+ss -tulnp
+curl -I https://example.com
+ping google.com
+
+chmod 755 file.sh
+chown user:group file
+
+```
 ---
 
 ## 🌱 Git
@@ -61,6 +78,23 @@ For **every tool**, explain:
 - Tags for releases (lightweight vs annotated)
 - Git hooks enable automation
 - History is immutable unless rewritten
+
+```
+git clone <repo_url>
+git status
+git branch
+git checkout -b feature-branch
+git add .
+git commit -m "message"
+git push origin feature-branch
+
+git fetch
+git pull
+git rebase main
+git cherry-pick <commit_id>
+git revert <commit_id>
+git stash
+```
 
 ---
 
@@ -111,6 +145,17 @@ For **every tool**, explain:
   - Middleware configuration
   - Server hardening
 
+```
+ansible --version
+ansible all -i inventory -m ping
+ansible-playbook playbook.yml
+ansible-playbook playbook.yml --check
+ansible-playbook playbook.yml --tags nginx
+
+ansible-vault encrypt secrets.yml
+ansible-vault decrypt secrets.yml
+
+```
 ---
 
 ## 🏗️ Terraform
@@ -133,6 +178,19 @@ For **every tool**, explain:
 - Terraform Cloud supports policy enforcement
 - Not intended for in-server configuration
 
+```
+terraform init
+terraform validate
+terraform plan
+terraform apply
+terraform destroy
+
+terraform state list
+terraform state show <resource>
+terraform workspace list
+terraform workspace select dev
+
+```
 ---
 
 ## 🧩 Jenkins
@@ -154,6 +212,19 @@ For **every tool**, explain:
 - Commonly runs on Kubernetes
 - Requires plugin and security maintenance
 
+```
+pipeline {
+  agent any
+  stages {
+    stage('Build') {
+      steps {
+        sh 'mvn clean package'
+      }
+    }
+  }
+}
+
+```
 ---
 
 ## 🐳 Docker
@@ -178,7 +249,20 @@ For **every tool**, explain:
 - Read-only filesystems
 - Image scanning before deployment
 
+```
+docker version
+docker build -t myapp:1.0 .
+docker images
+docker run -d -p 80:80 myapp
+docker ps
+docker logs <container_id>
+docker exec -it <container_id> sh
+docker stop <container_id>
+docker rm <container_id>
+
+```
 ---
+
 
 ## ☸️ Kubernetes
 
@@ -208,6 +292,20 @@ For **every tool**, explain:
 - Pod Security Standards
 - Admission Controllers
 
+```
+kubectl get nodes
+kubectl get pods
+kubectl get svc
+kubectl describe pod <pod_name>
+kubectl logs <pod_name>
+kubectl exec -it <pod_name> -- sh
+
+kubectl apply -f deployment.yml
+kubectl delete -f deployment.yml
+kubectl rollout status deployment <app>
+kubectl scale deployment <app> --replicas=3
+
+```
 ---
 
 ## 🔐 HashiCorp Vault
@@ -228,6 +326,16 @@ For **every tool**, explain:
 - Fits Zero Trust model
 - Supports AppRole, Kubernetes, cloud IAM
 
+```
+vault status
+vault login
+vault secrets list
+vault kv get secret/db
+vault kv put secret/db password=123
+vault auth list
+vault policy list
+
+```
 ---
 
 ## 📊 SonarQube
@@ -243,6 +351,14 @@ For **every tool**, explain:
 - Integrates with PR checks
 - Supports shift-left security
 
+```
+sonar-scanner \
+  -Dsonar.projectKey=myapp \
+  -Dsonar.sources=. \
+  -Dsonar.host.url=http://sonarqube:9000 \
+  -Dsonar.login=$SONAR_TOKEN
+
+```
 ---
 
 ## 🔎 GitLeaks
@@ -260,6 +376,13 @@ For **every tool**, explain:
   - CI pipeline step
 - Important for SOC2 / ISO compliance
 
+```
+gitleaks detect
+gitleaks detect --source .
+gitleaks detect --redact
+gitleaks protect --staged
+
+```
 ---
 
 ## 🛡️ Trivy
@@ -278,6 +401,15 @@ For **every tool**, explain:
 - Severity-based pipeline failures
 - Uses multiple vulnerability databases
 
+```
+trivy image nginx:latest
+trivy image --severity HIGH,CRITICAL myapp:1.0
+trivy fs .
+trivy config .
+trivy k8s cluster
+
+```
+
 ---
 
 ## 📦 Syft
@@ -293,6 +425,13 @@ For **every tool**, explain:
 - Required for audits and compliance
 - Used before vulnerability scanning
 
+```
+syft myapp:1.0
+syft myapp:1.0 -o json
+syft dir:.
+
+```
+
 ---
 
 ## 🧨 Grype
@@ -307,6 +446,12 @@ For **every tool**, explain:
 - Supports policy enforcement
 - Strengthens supply-chain security
 
+```
+grype myapp:1.0
+grype sbom:sbom.json
+grype myapp:1.0 --severity critical
+
+```
 ---
 
 ## ✍️ Cosign
@@ -322,6 +467,12 @@ For **every tool**, explain:
 - Uses transparency logs
 - Integrates with CI/CD and Kubernetes admission controllers
 
+```
+cosign generate-key-pair
+cosign sign --key cosign.key myapp:1.0
+cosign verify --key cosign.pub myapp:1.0
+
+```
 ---
 
 ## ⚡ GitHub Actions
@@ -339,6 +490,17 @@ For **every tool**, explain:
 - OIDC support for cloud authentication
 - Ideal for GitOps workflows
 
+```
+name: CI Pipeline
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker build -t myapp .
+```
 ---
 
 ## 🔵 Azure DevOps
@@ -359,6 +521,15 @@ For **every tool**, explain:
 - Strong Azure and Kubernetes integration
 - Role-based access control
 
+```
+trigger:
+- main
+
+steps:
+- script: terraform plan
+- script: terraform apply -auto-approve
+
+```
 ---
 
 ## ☁️ AWS
@@ -380,6 +551,14 @@ For **every tool**, explain:
   - Security Hub
 - Logging with CloudTrail and CloudWatch
 
+```
+aws configure
+aws ec2 describe-instances
+aws s3 ls
+aws s3 cp file.txt s3://bucket
+aws eks update-kubeconfig --name cluster
+
+```
 ---
 
 ## ☁️ Azure
@@ -401,6 +580,13 @@ For **every tool**, explain:
 - Defender for Cloud improves posture
 - Tight Microsoft ecosystem integration
 
+```
+az login
+az account list
+az vm list
+az aks get-credentials --name cluster --resource-group rg
+
+```
 ---
 
 ## ☁️ GCP
@@ -421,6 +607,13 @@ For **every tool**, explain:
 - High-performance networking
 - Preferred for data and ML workloads
 
+```
+gcloud auth login
+gcloud config list
+gcloud compute instances list
+gcloud container clusters get-credentials cluster
+
+```
 ---
 
 ## 🏆 DevSecOps Master Rule
