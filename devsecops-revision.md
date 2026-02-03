@@ -144,14 +144,110 @@ git stash
 
 ```
 pipeline {
-  agent any
-  stages {
-    stage('Build') {
-      steps {
-        sh 'mvn clean package'
-      }
+    agent any
+
+    environment {
+        APP_NAME = "demo-app"
+        DOCKER_IMAGE = "aryavedha/demo-app"
+        DOCKER_TAG = "${BUILD_NUMBER}"
     }
-  }
+
+    tools {
+        maven 'maven-3.9'
+        jdk 'jdk-17'
+    }
+
+    stages {
+
+        stage('Checkout Code') {
+            steps {
+                echo "Cloning source code..."
+                git branch: 'main',
+                    url: 'https://github.com/your-org/demo-app.git'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                echo "Building application..."
+                sh 'mvn clean package -DskipTests'
+            }
+        }
+
+        stage('Unit Tests') {
+            steps {
+                echo "Running unit tests..."
+                sh 'mvn test'
+            }
+        }
+
+        stage('Code Quality Scan (SonarQube)') {
+            steps {
+                echo "Running SonarQube scan..."
+                withSonarQubeEnv('sonarqube-server') {
+                    sh '''
+                      mvn sonar:sonar \
+                      -Dsonar.projectKey=demo-app \
+                      -Dsonar.projectName=demo-app
+                    '''
+                }
+            }
+        }
+
+        stage('Security Scan (Trivy)') {
+            steps {
+                echo "Scanning filesystem for vulnerabilities..."
+                sh 'trivy fs --exit-code 0 --severity HIGH,CRITICAL .'
+            }
+        }
+
+        stage('Docker Build') {
+            steps {
+                echo "Building Docker image..."
+                sh """
+                  docker build -t ${DOCKER_IMAGE}:${DOCKER_TAG} .
+                """
+            }
+        }
+
+        stage('Docker Push') {
+            steps {
+                echo "Pushing image to Docker Hub..."
+                withCredentials([usernamePassword(
+                    credentialsId: 'dockerhub-creds',
+                    usernameVariable: 'DOCKER_USER',
+                    passwordVariable: 'DOCKER_PASS'
+                )]) {
+                    sh """
+                      echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
+                      docker push ${DOCKER_IMAGE}:${DOCKER_TAG}
+                    """
+                }
+            }
+        }
+
+        stage('Deploy to Kubernetes') {
+            steps {
+                echo "Deploying to Kubernetes..."
+                sh '''
+                  kubectl set image deployment/demo-app \
+                  demo-app=${DOCKER_IMAGE}:${DOCKER_TAG} -n demo
+                '''
+            }
+        }
+    }
+
+    post {
+        success {
+            echo "✅ Pipeline completed successfully!"
+        }
+        failure {
+            echo "❌ Pipeline failed. Check logs."
+        }
+        always {
+            cleanWs()
+        }
+    }
 }
 
 ```
