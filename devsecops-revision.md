@@ -308,6 +308,148 @@ kubectl rollout status deployment <app>
 kubectl scale deployment <app> --replicas=3
 
 ```
+k8s demo manifest file
+1️⃣ Namespace
+```
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: demo-app
+```
+2️⃣ ConfigMap (app configuration)
+```
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-config
+  namespace: demo-app
+data:
+  index.html: |
+    <html>
+      <body style="font-family: Arial">
+        <h1>Welcome to Demo App 🚀</h1>
+        <p>Running on Kubernetes</p>
+      </body>
+    </html>
+```
+3️⃣ Secret (simulating sensitive data)
+```
+apiVersion: v1
+kind: Secret
+metadata:
+  name: app-secret
+  namespace: demo-app
+type: Opaque
+data:
+  DB_PASSWORD: cGFzc3dvcmQxMjM=   # password123 (base64)
+```
+
+4️⃣ Deployment (real-world settings)
+```
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  namespace: demo-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.25
+        ports:
+        - containerPort: 80
+        env:
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: app-secret
+              key: DB_PASSWORD
+        volumeMounts:
+        - name: web-content
+          mountPath: /usr/share/nginx/html
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "128Mi"
+          limits:
+            cpu: "300m"
+            memory: "256Mi"
+      volumes:
+      - name: web-content
+        configMap:
+          name: nginx-config
+```
+
+5️⃣ Service (internal exposure)
+```
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-service
+  namespace: demo-app
+spec:
+  type: ClusterIP
+  selector:
+    app: nginx
+  ports:
+  - port: 80
+    targetPort: 80
+```
+
+6️⃣ Ingress (real-world access)
+```
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: nginx-ingress
+  namespace: demo-app
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: demo.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: nginx-service
+            port:
+              number: 80
+```
+7️⃣ HPA (Auto-Scaling)
+```
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: nginx-hpa
+  namespace: demo-app
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: nginx-deployment
+  minReplicas: 2
+  maxReplicas: 5
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 60
+
+```
 ---
 
 ## 🔐 HashiCorp Vault
