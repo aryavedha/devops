@@ -123,76 +123,6 @@ git stash
 
 ---
 
-## 🤖 Ansible
-
-### Key Concepts
-- Agentless configuration management
-- Push-based model using SSH
-- Playbooks written in YAML
-- Idempotent execution
-
-### Architecture
-- Inventory defines managed hosts
-- Roles improve reuse and structure
-- Variables and Jinja2 templates enable dynamic configs
-- Facts collect system information
-
-### Security & Operations
-- Ansible Vault encrypts secrets
-- Dry run support (`--check`)
-- Used for:
-  - Patch management
-  - Middleware configuration
-  - Server hardening
-
-```
-ansible --version
-ansible all -i inventory -m ping
-ansible-playbook playbook.yml
-ansible-playbook playbook.yml --check
-ansible-playbook playbook.yml --tags nginx
-
-ansible-vault encrypt secrets.yml
-ansible-vault decrypt secrets.yml
-
-```
----
-
-## 🏗️ Terraform
-
-### Key Concepts
-- Infrastructure as Code (IaC)
-- Declarative syntax using HCL
-- Manages infrastructure lifecycle
-
-### State & Team Usage
-- State file tracks resources and is sensitive
-- Remote state prevents team conflicts
-- State locking avoids concurrent changes
-- Drift detection identifies manual changes
-
-### Advanced Features
-- Modules promote DRY principles
-- Workspaces manage environments
-- Dependency graph controls execution order
-- Terraform Cloud supports policy enforcement
-- Not intended for in-server configuration
-
-```
-terraform init
-terraform validate
-terraform plan
-terraform apply
-terraform destroy
-
-terraform state list
-terraform state show <resource>
-terraform workspace list
-terraform workspace select dev
-
-```
----
-
 ## 🧩 Jenkins
 
 ### Key Concepts
@@ -223,6 +153,78 @@ pipeline {
     }
   }
 }
+
+```
+---
+
+## 🔎 GitLeaks
+
+### Key Concepts
+- Secret detection tool
+- Regex-based scanning
+- Lightweight and fast
+
+### Usage
+- Scans commits, branches, and history
+- Detects API keys, passwords, tokens
+- Used as:
+  - Pre-commit hook
+  - CI pipeline step
+- Important for SOC2 / ISO compliance
+
+```
+gitleaks detect
+gitleaks detect --source .
+gitleaks detect --redact
+gitleaks protect --staged
+
+```
+---
+
+## 🛡️ Trivy
+
+### Key Concepts
+- Vulnerability and misconfiguration scanner
+- Popular open-source DevSecOps tool
+
+### Capabilities
+- Scans:
+  - Container images
+  - Filesystems
+  - Kubernetes clusters
+  - IaC (Terraform, Helm)
+- Detects CVEs and exposed secrets
+- Severity-based pipeline failures
+- Uses multiple vulnerability databases
+
+```
+trivy image nginx:latest
+trivy image --severity HIGH,CRITICAL myapp:1.0
+trivy fs .
+trivy config .
+trivy k8s cluster
+
+```
+---
+## 📊 SonarQube
+
+### Key Concepts
+- Static Application Security Testing (SAST)
+- Enforces code quality standards
+
+### Capabilities
+- Detects bugs, vulnerabilities, code smells
+- Measures code coverage and technical debt
+- Quality Gates block insecure code
+- Integrates with PR checks
+- Supports shift-left security
+
+```
+sonar-scanner \
+  -Dsonar.projectKey=myapp \
+  -Dsonar.sources=. \
+  -Dsonar.host.url=http://sonarqube:9000 \
+  -Dsonar.login=$SONAR_TOKEN
 
 ```
 ---
@@ -338,80 +340,6 @@ vault policy list
 ```
 ---
 
-## 📊 SonarQube
-
-### Key Concepts
-- Static Application Security Testing (SAST)
-- Enforces code quality standards
-
-### Capabilities
-- Detects bugs, vulnerabilities, code smells
-- Measures code coverage and technical debt
-- Quality Gates block insecure code
-- Integrates with PR checks
-- Supports shift-left security
-
-```
-sonar-scanner \
-  -Dsonar.projectKey=myapp \
-  -Dsonar.sources=. \
-  -Dsonar.host.url=http://sonarqube:9000 \
-  -Dsonar.login=$SONAR_TOKEN
-
-```
----
-
-## 🔎 GitLeaks
-
-### Key Concepts
-- Secret detection tool
-- Regex-based scanning
-- Lightweight and fast
-
-### Usage
-- Scans commits, branches, and history
-- Detects API keys, passwords, tokens
-- Used as:
-  - Pre-commit hook
-  - CI pipeline step
-- Important for SOC2 / ISO compliance
-
-```
-gitleaks detect
-gitleaks detect --source .
-gitleaks detect --redact
-gitleaks protect --staged
-
-```
----
-
-## 🛡️ Trivy
-
-### Key Concepts
-- Vulnerability and misconfiguration scanner
-- Popular open-source DevSecOps tool
-
-### Capabilities
-- Scans:
-  - Container images
-  - Filesystems
-  - Kubernetes clusters
-  - IaC (Terraform, Helm)
-- Detects CVEs and exposed secrets
-- Severity-based pipeline failures
-- Uses multiple vulnerability databases
-
-```
-trivy image nginx:latest
-trivy image --severity HIGH,CRITICAL myapp:1.0
-trivy fs .
-trivy config .
-trivy k8s cluster
-
-```
-
----
-
 ## 📦 Syft
 
 ### Key Concepts
@@ -475,61 +403,75 @@ cosign verify --key cosign.pub myapp:1.0
 ```
 ---
 
-## ⚡ GitHub Actions
+## 🤖 Ansible
 
 ### Key Concepts
-- GitHub-native CI/CD platform
-- Workflow defined in YAML
+- Agentless configuration management
+- Push-based model using SSH
+- Playbooks written in YAML
+- Idempotent execution
 
-### Capabilities
-- Event-driven pipelines
-- Matrix builds
-- Reusable workflows
-- Environment-based approvals
-- Secrets masking
-- OIDC support for cloud authentication
-- Ideal for GitOps workflows
+### Architecture
+- Inventory defines managed hosts
+- Roles improve reuse and structure
+- Variables and Jinja2 templates enable dynamic configs
+- Facts collect system information
+
+### Security & Operations
+- Ansible Vault encrypts secrets
+- Dry run support (`--check`)
+- Used for:
+  - Patch management
+  - Middleware configuration
+  - Server hardening
 
 ```
-name: CI Pipeline
-on: [push]
+ansible --version
+ansible all -i inventory -m ping
+ansible-playbook playbook.yml
+ansible-playbook playbook.yml --check
+ansible-playbook playbook.yml --tags nginx
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - run: docker build -t myapp .
+ansible-vault encrypt secrets.yml
+ansible-vault decrypt secrets.yml
+
 ```
 ---
 
-## 🔵 Azure DevOps
+## 🏗️ Terraform
 
 ### Key Concepts
-- Enterprise DevOps platform from Microsoft
+- Infrastructure as Code (IaC)
+- Declarative syntax using HCL
+- Manages infrastructure lifecycle
 
-### Components
-- Repos
-- Pipelines
-- Boards
-- Artifacts
+### State & Team Usage
+- State file tracks resources and is sensitive
+- Remote state prevents team conflicts
+- State locking avoids concurrent changes
+- Drift detection identifies manual changes
 
-### Capabilities
-- YAML and classic pipelines
-- Linux and Windows agents
-- Agile & Scrum planning
-- Strong Azure and Kubernetes integration
-- Role-based access control
-
-```
-trigger:
-- main
-
-steps:
-- script: terraform plan
-- script: terraform apply -auto-approve
+### Advanced Features
+- Modules promote DRY principles
+- Workspaces manage environments
+- Dependency graph controls execution order
+- Terraform Cloud supports policy enforcement
+- Not intended for in-server configuration
 
 ```
+terraform init
+terraform validate
+terraform plan
+terraform apply
+terraform destroy
+
+terraform state list
+terraform state show <resource>
+terraform workspace list
+terraform workspace select dev
+
+```
+
 ---
 
 ## ☁️ AWS
@@ -612,6 +554,65 @@ gcloud auth login
 gcloud config list
 gcloud compute instances list
 gcloud container clusters get-credentials cluster
+
+```
+---
+
+---
+
+## ⚡ GitHub Actions
+
+### Key Concepts
+- GitHub-native CI/CD platform
+- Workflow defined in YAML
+
+### Capabilities
+- Event-driven pipelines
+- Matrix builds
+- Reusable workflows
+- Environment-based approvals
+- Secrets masking
+- OIDC support for cloud authentication
+- Ideal for GitOps workflows
+
+```
+name: CI Pipeline
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker build -t myapp .
+```
+---
+
+## 🔵 Azure DevOps
+
+### Key Concepts
+- Enterprise DevOps platform from Microsoft
+
+### Components
+- Repos
+- Pipelines
+- Boards
+- Artifacts
+
+### Capabilities
+- YAML and classic pipelines
+- Linux and Windows agents
+- Agile & Scrum planning
+- Strong Azure and Kubernetes integration
+- Role-based access control
+
+```
+trigger:
+- main
+
+steps:
+- script: terraform plan
+- script: terraform apply -auto-approve
 
 ```
 ---
