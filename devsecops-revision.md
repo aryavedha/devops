@@ -616,6 +616,438 @@ steps:
 
 ```
 ---
+# 🚀 DevSecOps Tools – Monitoring, Build, Runtime & Databases
+
+---
+
+## 🐚 Shell Scripting
+
+### Key Concepts
+- Automates repetitive Linux tasks
+- Used heavily in CI/CD pipelines
+- Glue between tools (Git, Docker, Cloud, Kubernetes)
+- Bash is the most commonly used shell
+- Scripts should be idempotent and error-aware
+
+### Best Practices
+- Use `#!/bin/bash`
+- Enable strict mode:
+  ```bash
+  set -euo pipefail
+Log outputs
+
+Validate inputs
+
+Avoid hardcoding secrets
+
+Real-World Commands
+```
+#!/bin/bash
+
+echo "Build started"
+DATE=$(date)
+echo "Date: $DATE"
+
+if systemctl is-active docker; then
+  echo "Docker is running"
+else
+  systemctl start docker
+fi
+
+for i in {1..5}; do
+  echo "Iteration $i"
+done
+
+df -h | grep -v tmpfs
+```
+---
+📈 Prometheus
+Key Concepts
+Time-series monitoring system
+
+Pull-based metrics collection
+
+Uses PromQL for querying
+
+Stores metrics, not logs
+
+Kubernetes-native monitoring tool
+
+Architecture
+Prometheus Server
+
+Exporters (Node, App, Custom)
+
+Alertmanager
+
+Targets discovered via service discovery
+
+Real-World Commands
+```
+# Check Prometheus targets
+curl http://localhost:9090/targets
+
+# Example PromQL
+up
+node_cpu_seconds_total
+rate(http_requests_total[5m])
+```
+---
+📊 Grafana
+Key Concepts
+Visualization and dashboarding tool
+
+Works with Prometheus, Loki, CloudWatch, Elasticsearch
+
+Used for monitoring and alerting
+
+Role-based access control
+
+Real-World Usage
+Create dashboards for:
+
+CPU / Memory
+
+Pod health
+
+API latency
+
+Set alerts for SLA breaches
+
+Real-World Commands
+```
+# Run Grafana
+docker run -d -p 3000:3000 grafana/grafana
+
+# Default login
+admin / admin
+```
+---
+📚 ELK Stack (Elasticsearch, Logstash, Kibana)
+Key Concepts
+Centralized logging solution
+
+Elasticsearch stores and indexes logs
+
+Logstash processes logs
+
+Kibana visualizes logs
+
+Use Cases
+Application log analysis
+
+Security auditing
+
+Incident RCA
+
+Observability
+
+Real-World Commands
+```
+# Check Elasticsearch health
+curl http://localhost:9200/_cluster/health
+
+# List indices
+curl http://localhost:9200/_cat/indices
+
+# Common log path
+/var/log/*.log
+```
+---
+☁️ CloudWatch (AWS)
+Key Concepts
+Native AWS monitoring service
+
+Collects logs, metrics, and events
+
+Integrated with AWS services
+
+Supports alarms and dashboards
+
+Real-World Usage
+Monitor EC2, EKS, Lambda
+
+Centralized logging
+
+Alerting on CPU, memory, errors
+
+Real-World Commands
+```
+aws cloudwatch list-metrics
+aws logs describe-log-groups
+aws logs tail /aws/ec2/system --follow
+```
+---
+🚨 Nagios
+Key Concepts
+Traditional infrastructure monitoring
+
+Host and service monitoring
+
+Plugin-based architecture
+
+Alerting via email/SMS
+
+Use Cases
+Server availability
+
+Disk, CPU, memory checks
+
+Legacy environments
+
+Real-World Commands
+```
+systemctl status nagios
+/usr/local/nagios/libexec/check_disk -w 20% -c 10%
+```
+---
+📦 Nexus Repository
+Key Concepts
+Artifact repository manager
+
+Stores binaries and dependencies
+
+Supports Maven, Docker, NPM, NuGet, PyPI
+
+Prevents dependency loss
+
+Use Cases
+Dependency caching
+
+Artifact versioning
+
+Secure artifact distribution
+
+Real-World Usage
+```
+# Docker login
+docker login nexus.company.com
+
+# Push image
+docker push nexus.company.com/myapp:1.0
+```
+---
+⎈ Helm
+Key Concepts
+Kubernetes package manager
+
+Uses charts (templated YAML)
+
+Manages application lifecycle
+
+Simplifies Kubernetes deployments
+
+Real-World Commands
+```
+helm repo add bitnami https://charts.bitnami.com/bitnami
+helm search repo nginx
+helm install myapp bitnami/nginx
+helm list
+helm upgrade myapp bitnami/nginx
+helm uninstall myapp
+```
+---
+🚀 Argo CD
+Key Concepts
+GitOps continuous delivery tool
+
+Kubernetes-native
+
+Git is the single source of truth
+
+Automatic drift detection
+
+Real-World Commands
+```
+argocd login localhost:8080
+argocd app list
+argocd app sync myapp
+argocd app status myapp
+```
+---
+🕸️ Service Mesh – Istio
+Key Concepts
+Manages service-to-service communication
+
+Provides traffic management, security, observability
+
+Uses Envoy sidecar proxies
+
+Capabilities
+mTLS
+
+Traffic splitting
+
+Circuit breaking
+
+Retries and timeouts
+
+Real-World Commands
+```
+istioctl install
+kubectl get pods -n istio-system
+istioctl analyze
+```
+---
+🌐 Nginx
+Key Concepts
+Web server and reverse proxy
+
+Load balancer
+
+Common ingress controller in Kubernetes
+
+Real-World Commands
+```
+nginx -t
+systemctl restart nginx
+tail -f /var/log/nginx/access.log
+```
+---
+🌐 Apache HTTP Server
+Key Concepts
+Traditional web server
+
+Module-based architecture
+
+Common in legacy apps
+
+Real-World Commands
+```
+apachectl configtest
+systemctl restart httpd
+tail -f /var/log/httpd/error_log
+```
+---
+☕ Apache Tomcat
+Key Concepts
+Java application server
+
+Runs WAR files
+
+Used for Spring / Java apps
+
+Real-World Commands
+```
+systemctl status tomcat
+tail -f /opt/tomcat/logs/catalina.out
+```
+---
+🛠️ Maven
+Key Concepts
+Java build and dependency management tool
+
+Uses pom.xml
+
+Standard lifecycle phases
+
+Real-World Commands
+```
+mvn clean
+mvn compile
+mvn test
+mvn package
+mvn deploy
+```
+---
+🧩 NuGet
+Key Concepts
+Package manager for .NET
+
+Used in Azure DevOps pipelines
+
+Supports private feeds
+
+Real-World Commands
+```
+nuget restore
+dotnet add package Newtonsoft.Json
+dotnet build
+```
+---
+📦 NPM
+Key Concepts
+JavaScript package manager
+
+Used for Node.js and frontend apps
+
+Lock files ensure consistent builds
+
+Real-World Commands
+```
+npm install
+npm install express
+npm run build
+npm audit
+```
+---
+🐍 Pip
+Key Concepts
+Python package manager
+
+Works with requirements.txt
+
+Used heavily in automation and scripting
+
+Real-World Commands
+```
+pip install flask
+pip install -r requirements.txt
+pip freeze
+```
+---
+🗄️ MySQL
+Key Concepts
+Relational database
+
+ACID compliant
+
+Widely used in web apps
+
+Real-World Commands
+```
+SHOW DATABASES;
+CREATE DATABASE appdb;
+USE appdb;
+SHOW TABLES;
+SELECT * FROM users;
+```
+---
+🐘 PostgreSQL
+Key Concepts
+Advanced relational database
+
+Strong consistency and performance
+
+Preferred for enterprise apps
+
+Real-World Commands
+```
+psql -U postgres
+\l
+\c mydb
+\dt
+SELECT * FROM employees;
+```
+---
+🍃 MongoDB
+Key Concepts
+NoSQL document database
+
+Schema-less design
+
+Scales horizontally
+
+Real-World Commands
+```
+mongosh
+show dbs
+use mydb
+show collections
+db.users.find()
+```
+
+---
 
 ## 🏆 DevSecOps Master Rule
 
